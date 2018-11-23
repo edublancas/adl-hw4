@@ -113,28 +113,50 @@ class Classifier {
         await loadHostedMetadata(this.urls.metadata);
     showMetadata(metadata);
     this.maxLen = metadata['max_len'];
+    // also load vocab size
+    this.vocabSize = metadata['vocabulary_size'];
+
     console.log('maxLen = ' + this.maxLen);
+
     this.wordIndex = metadata['word_index']
   }
 
   predict(text) {
     // Convert to lower case and remove all punctuations.
-    const inputText =
-        text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split(' ');
+    var inputText =
+        text.trim().toLowerCase().replace(/(\.|\,|\!|\_|\;)/g, '').split(' ');
+    // console.log(inputText)
+    // ADDED: only get the last this.maxLen elements from the text, if text
+    // exceeds this.maxLen
+    if (inputText.length > this.maxLen){
+        inputText = inputText.slice((inputText.length - this.maxLen), inputText.length)
+    }
+
     // Look up word indices.
     const inputBuffer = tf.buffer([1, this.maxLen], 'float32');
+
+    var idx_current = 0
+
     for (let i = 0; i < inputText.length; ++i) {
       const word = inputText[i];
-      inputBuffer.set(this.wordIndex[word], 0, i);
-      //console.log(word, this.wordIndex[word], inputBuffer);
+
+      const idx_word = this.wordIndex[word]
+
+      // ADDED: only add the word if index is within the vocabulary size
+      if (idx_word <= this.vocabSize){
+        inputBuffer.set(idx_word, 0, idx_current);
+        idx_current++
+        // console.log(word, this.wordIndex[word], inputBuffer);
+      }
     }
+    // console.log(inputBuffer)
     const input = inputBuffer.toTensor();
-    //console.log(input);
+    console.log(input.toString());
 
     status('Running inference');
     const beginMs = performance.now();
     const predictOut = this.model.predict(input);
-    //console.log(predictOut.dataSync());
+    // console.log(predictOut.dataSync());
     const score = predictOut.dataSync();//[0];
     predictOut.dispose();
     const endMs = performance.now();
