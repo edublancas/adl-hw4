@@ -8,11 +8,11 @@ const HOSTED_URLS = {
 
 const examples = {
   'example1':
-      'Alice was beginning to get very tired of sitting by her sister on the bank.',
+      'When she remembered the style of his address, she was still full of indignation; but when she considered how unjustly she had condemned and upbraided him, her anger was turned against herself; and his disappointed feelings became the object of compassion',
   'example2':
-      'Buda-Pesth seems a wonderful place.',
+      ' But she has confessed.” This was a dire blow to poor Elizabeth, who had relied with firmness upon Justine’s innocence',
   'example3':
-      'Scepticism was as much the result of knowledge, as knowledge is of scepticism.'      
+      'The other man remained'      
 };
 
 function status(statusText) {
