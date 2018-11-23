@@ -8,11 +8,11 @@ const HOSTED_URLS = {
 
 const examples = {
   'example1':
-      'When she remembered the style of his address, she was still full of indignation; but when she considered how unjustly she had condemned and upbraided him, her anger was turned against herself; and his disappointed feelings became the object of compassion',
+      '_That_ is my idea of good breeding; and those persons who fancy themselves very important, and never open their mouths, quite mistake the matter.” “Did Charlotte dine with you?” “No, she would go home',
   'example2':
-      ' But she has confessed.” This was a dire blow to poor Elizabeth, who had relied with firmness upon Justine’s innocence',
+      'I wished to see him again, that I might wreak the utmost extent of abhorrence on his head and avenge the deaths of William and Justine',
   'example3':
-      'The other man remained'      
+      'I observed with assumed innocence that no man was safe from trouble in this world'      
 };
 
 function status(statusText) {
